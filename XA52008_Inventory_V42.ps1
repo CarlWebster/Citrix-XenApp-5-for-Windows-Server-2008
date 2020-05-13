@@ -92,11 +92,11 @@
 .PARAMETER StartDate
 	Start date, in MM/DD/YYYY HH:MM format, for the Configuration Logging report.
 	Default is today's date minus seven days.
-	If the StartDate is entered as 01/01/2014, the date becomes 01/01/2014 00:00:00.
+	If the StartDate is entered as 01/01/2020, the date becomes 01/01/2020 00:00:00.
 .PARAMETER EndDate
 	End date, in MM/DD/YYYY HH:MM format, for the Configuration Logging report.
 	Default is today's date.
-	If the EndDate is entered as 01/01/2014, the date becomes 01/01/2014 00:00:00.
+	If the EndDate is entered as 01/01/2020, the date becomes 01/01/2020 00:00:00.
 .PARAMETER Summary
 	Only give summary information, no details.
 	This parameter is disabled by default.
@@ -114,8 +114,8 @@
 .PARAMETER AddDateTime
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be ReportName_2014-06-01_1800.docx (or .pdf).
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be ReportName_2020-06-01_1800.docx (or .pdf).
 	This parameter is disabled by default.
 .PARAMETER Section
 	Processes a specific section of the report.
@@ -189,7 +189,7 @@
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
 .EXAMPLE
-	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2014" -EndDate "01/02/2014"
+	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2020" -EndDate "01/02/2020"
 	
 	Will use all Default values and add additional information for each server about its installed applications.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl Webster" or
@@ -199,9 +199,9 @@
 	Carl Webster for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
-	Will return all Configuration Logging entries from "01/01/2014 00:00:00" through "01/02/2014 "00:00:00".
+	Will return all Configuration Logging entries from "01/01/2020 00:00:00" through "01/02/2020 "00:00:00".
 .EXAMPLE
-	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2014" -EndDate "01/01/2014"
+	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2020" -EndDate "01/01/2020"
 	
 	Will use all Default values and add additional information for each server about its installed applications.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl Webster" or
@@ -211,9 +211,9 @@
 	Carl Webster for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
-	Will return all Configuration Logging entries from "01/01/2014 00:00:00" through "01/01/2014 "00:00:00".  In other words, nothing is returned.
+	Will return all Configuration Logging entries from "01/01/2020 00:00:00" through "01/01/2020 "00:00:00".  In other words, nothing is returned.
 .EXAMPLE
-	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2014 21:00:00" -EndDate "01/01/2014 22:00:00"
+	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -StartDate "01/01/2020 21:00:00" -EndDate "01/01/2020 22:00:00"
 	
 	Will use all Default values and add additional information for each server about its installed applications.
 	HKEY_CURRENT_USER\Software\Microsoft\Office\Common\UserInfo\CompanyName="Carl Webster" or
@@ -223,7 +223,7 @@
 	Carl Webster for the Company Name.
 	Sideline for the Cover Page format.
 	Administrator for the User Name.
-	Will return all Configuration Logging entries from 9PM to 10PM on 01/01/2014.
+	Will return all Configuration Logging entries from 9PM to 10PM on 01/01/2020.
 .EXAMPLE
 	PS C:\PSScript .\XA52008_Inventory_V42.ps1 -CompanyName "Carl Webster Consulting" -CoverPage "Mod" -UserName "Carl Webster"
 
@@ -264,8 +264,8 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be XA5FarmName_2014-06-01_1800.docx
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be XA5FarmName_2020-06-01_1800.docx
 .EXAMPLE
 	PS C:\PSScript > .\XA52008_Inventory_V42.ps1 -PDF -AddDateTime
 	
@@ -281,17 +281,17 @@
 
 	Adds a date time stamp to the end of the file name.
 	Time stamp is in the format of yyyy-MM-dd_HHmm.
-	June 1, 2014 at 6PM is 2014-06-01_1800.
-	Output filename will be XA5FarmName_2014-06-01_1800.pdf
+	June 1, 2020 at 6PM is 2020-06-01_1800.
+	Output filename will be XA5FarmName_2020-06-01_1800.pdf
 .INPUTS
 	None.  You cannot pipe objects to this script.
 .OUTPUTS
 	No objects are output from this script.  This script creates a Word or PDF document.
 .NOTES
 	NAME: XA52008_Inventory_V42.ps1
-	VERSION: 4.21
+	VERSION: 4.22
 	AUTHOR: Carl Webster (with a lot of help from Michael B. Smith and Jeff Wouters)
-	LASTEDIT: February 13, 2017
+	LASTEDIT: December 17, 2019
 #>
 
 
@@ -357,6 +357,18 @@ Param(
 #http://www.CarlWebster.com
 #modified from original script for XenApp 5
 #originally released to the Citrix community on October 3, 2011
+
+#Version 4.22 17-Dec-2019
+#	Fix Swedish Table of Contents (Thanks to Johan Kallio)
+#		From 
+#			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+#		To
+#			'sv-'	{ 'Automatisk innehållsförteckn2'; Break }
+#	Updated help text
+#
+#Version 4.21 13-Feb-2017
+#	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
+#
 #Version 4.2
 #	Fix the SWExclusions function to work if SoftwareExclusions.txt file contains only one item
 #	Cleanup the script's parameters section
@@ -393,8 +405,6 @@ Param(
 #		Zones
 #		All
 #
-#Version 4.21 13-Feb-2017
-#	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
 
 
 Set-StrictMode -Version 2
@@ -1240,7 +1250,8 @@ Function SetWordHashTable
 			'nb-'	{ 'Automatisk tabell 2'; Break }
 			'nl-'	{ 'Automatische inhoudsopgave 2'; Break }
 			'pt-'	{ 'Sumário Automático 2'; Break }
-			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+			# fix in 4.22 thanks to Johan Kallio 'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+			'sv-'	{ 'Automatisk innehållsförteckn2'; Break }
 			'zh-'	{ '自动目录 2'; Break }
 		}
 	)
@@ -7207,3 +7218,9 @@ Write-Verbose "$(Get-Date): Elapsed time: $($Str)"
 $runtime = $Null
 $Str = $Null
 $ErrorActionPreference = $SaveEAPreference
+			
+Write-Host "                                                                                    " -BackgroundColor Black -ForegroundColor White
+Write-Host "               This FREE script was brought to you by Conversant Group              " -BackgroundColor Black -ForegroundColor White
+Write-Host "We design, build, and manage infrastructure for a secure, dependable user experience" -BackgroundColor Black -ForegroundColor White
+Write-Host "                       Visit our website conversantgroup.com                        " -BackgroundColor Black -ForegroundColor White
+Write-Host "                                                                                    " -BackgroundColor Black -ForegroundColor White

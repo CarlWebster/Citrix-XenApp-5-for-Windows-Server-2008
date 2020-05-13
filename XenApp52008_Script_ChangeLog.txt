@@ -1,15 +1,19 @@
 #Original Script created 8/17/2010 by Michael Bogobowicz, Citrix Systems.
 
-#To contact, please message @mikebogo on Twitter
-#The original script was designed to be run on a XenApp 6 server
-#Modifications by Carl Webster, CTP and independent consultant
-#webster@carlwebster.com
-
 #@carlwebster on Twitter
 #http://www.CarlWebster.com
 #modified from original script for XenApp 5
 #originally released to the Citrix community on October 3, 2011
 
+
+#Version 4.22 17-Dec-2019
+#	Fix Swedish Table of Contents (Thanks to Johan Kallio)
+#		From 
+#			'sv-'	{ 'Automatisk innehållsförteckning2'; Break }
+#		To
+#			'sv-'	{ 'Automatisk innehållsförteckn2'; Break }
+#	Updated help text
+#
 
 #Version 4.21 13-Feb-2017
 #	Fixed French wording for Table of Contents 2 (Thanks to David Rouquier)
